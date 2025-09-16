@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dots and Boxes - GameOn Creators Horizon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #gameCanvas {
+            display: block;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        #gameInfo {
+            margin-bottom: 15px;
+        }
+        
+        .player-info {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .player-info.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .player1 {
+            color: #4fc3f7;
+        }
+        
+        .player2 {
+            color: #f06292;
+        }
+        
+        #walletInfo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        #connectWallet {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        #connectWallet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        #gameControls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        #gameStatus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 200;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            display: none;
+        }
+        
+        .winner-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .score-text {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui">
+            <div id="gameInfo">
+                <h3>Dots and Boxes</h3>
+                <div class="player-info player1" id="player1Info">
+                    <strong>Player 1:</strong> <span id="player1Score">0</span> boxes
+                    <div id="player1Address"></div>
+                </div>
+                <div class="player-info player2" id="player2Info">
+                    <strong>Player 2:</strong> <span id="player2Score">0</span> boxes
+                    <div id="player2Address"></div>
+                </div>
+                <div id="currentTurn">Current Turn: Player 1</div>
+            </div>
+        </div>
+        
+        <div id="walletInfo">
+            <button id="connectWallet">Connect Wallet</button>
+            <div id="walletAddress" style="display: none;"></div>
+        </div>
+        
+        <div id="gameControls">
+            <button class="control-btn" id="newGameBtn">New Game</button>
+            <button class="control-btn" id="joinRoomBtn">Join Room</button>
+        </div>
+        
+        <div id="gameStatus">
+            <div class="winner-text" id="winnerText"></div>
+            <div class="score-text" id="finalScore"></div>
+            <button class="control-btn" id="playAgainBtn">Play Again</button>
+        </div>
+    </div>
+</body>
+</html>
+
